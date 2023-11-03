@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'Components.dart';
 
 
 class LoginScreen extends StatefulWidget {
@@ -43,76 +43,60 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       SizedBox(height: mediaQuery.size.height / 8),
 
-                      Text("Login", style: TextStyle(fontSize: 50)),
+                      TiTle(Title: "LOGIN"),
 
-                      SizedBox(height: mediaQuery.size.height / 12),
+                      SizedBox(height: mediaQuery.size.height / 20),
 
-                      TextFormField(
-
-                        validator: (val) {
-                          if (val!.isEmpty) {
+                      Field(
+                        Controller: EmailController,
+                          Keyboardtype: TextInputType.emailAddress,
+                          Name: "Email Address & Phone Number",
+                          Errors: (val){
+                            if (val!.isEmpty) {
                             return "The Field Is Empthy";
-                          } else if(!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(val)){
+                            } else if(!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+[.]+.[a-z]").hasMatch(val)){
                             return 'Email Is Valid';
-
-                          }
-                        },
-                        onFieldSubmitted: (value) {},
-                        controller: EmailController,
-                        decoration: InputDecoration(
-                          labelText: "Email Address & Phone Number",
-                          prefixIcon: Icon(Icons.email),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15)
-                          ),
-                        ),
+                            }},
+                          FieldIcon: Icons.email
 
                       ),
 
-                      SizedBox(height: 15),
 
-                      TextFormField(
-                          keyboardType: TextInputType.visiblePassword,
-                          obscureText: _obsecure,
-                          controller: PasswordController,
-                          validator: (val) {
+                      SizedBox(height: mediaQuery.size.height / 20),
+
+                      Field(
+                          Name: "Password",
+                          Keyboardtype:TextInputType.visiblePassword,
+                          Errors:  (val){
                             if (val!.isEmpty) {
                               return "The Field Is Empthy";
                             }
                           },
-                          decoration: InputDecoration(
-                            labelText: "Password",
-                            prefixIcon: Icon(Icons.lock),
-                            suffixIcon: IconButton(
-                              icon: _obsecure ? Icon(Icons.visibility):Icon(Icons.visibility_off),
-                              onPressed: () {
-                                setState(() {
-                                  _obsecure =! _obsecure;
-                                });
-                              }
-                            ),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                          )
+                          FieldIcon: Icons.password,
+                          Controller: PasswordController,
+                          IsPassword: _obsecure,
+                          suffix: Icons.remove_red_eye,
+                        onpressed:(){
+                            setState(() {
+                              _obsecure = !_obsecure;
+                            });
+                        }
                       ),
 
-                      SizedBox(height: 20),
+                      SizedBox(height: mediaQuery.size.height / 20),
 
-                      SizedBox(
-                        width: mediaQuery.size.width / 2,
-                        height: 50,
-                        child: ElevatedButton(
-                          child: Text('Login', style: TextStyle(fontSize: 15)),
-                          style: ButtonStyle(),
-                          onPressed: () {
+                      Buttons(
+                          Width: mediaQuery.size.width/2,
+                          TEXT: "LOGIN",
+                          onpressed: (){
                             print(EmailController);
                             print(PasswordController);
                             onSumbit();
                           },
-                        ),
+                          Height:50
                       ),
 
-                      SizedBox(height: 15),
+                      SizedBox(height: mediaQuery.size.height / 20),
 
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
