@@ -1,2 +1,2 @@
 # News-App
-Program for Android and iPhone phones by fLutter
+Program for Android and IOS by fLutter
